@@ -33,7 +33,7 @@ export async function addOfficialAccount(accountData) {
 	}
 
 	return handleApiResponse(
-		apiClient.post('/anyrouter2/addOfficialAccount', {
+		apiClient.post('/lyanyrouter/addOfficialAccount', {
 			username,
 			password,
 			account_type,
@@ -145,7 +145,7 @@ export async function addAccount(accountData) {
 		requestData.checkin_mode = checkin_mode;
 	}
 
-	return handleApiResponse(apiClient.post('/anyrouter2/addAccount', requestData));
+	return handleApiResponse(apiClient.post('/lyanyrouter/addAccount', requestData));
 }
 
 /**
@@ -153,6 +153,7 @@ export async function addAccount(accountData) {
  * @description 更新指定账号的信息，支持部分字段更新
  * @param {string} _id - 账号记录ID
  * @param {Object} updateData - 要更新的数据
+ * @param {string} [updateData.anyrouter_user_id] - 关联的AnyRouter用户ID，拥有这个账号的人（内部）
  * @param {string} [updateData.username] - 账号名称，根据account_type不同含义不同
  * @param {string} [updateData.password] - 账号密码，根据account_type不同含义不同
  * @param {string} [updateData.session] - 会话标识
@@ -198,7 +199,7 @@ export async function updateAccountInfo(_id, updateData) {
 	// 注意：account_type 字段现在允许更新，以支持账号类型转换（如从 LinuxDo 登录转为账号密码登录）
 
 	return handleApiResponse(
-		apiClient.post('/anyrouter2/updateAccountInfo', {
+		apiClient.post('/lyanyrouter/updateAccountInfo', {
 			_id,
 			updateData: filteredData,
 		})
@@ -224,7 +225,7 @@ export async function getAccountLoginInfo(params) {
 	}
 
 	return handleApiResponse(
-		apiClient.post('/anyrouter2/getAccountLoginInfo', {
+		apiClient.post('/lyanyrouter/getAccountLoginInfo', {
 			login_info_id,
 			account_id,
 		})
@@ -249,7 +250,7 @@ export async function addAccountLoginInfo(params) {
 	}
 
 	return handleApiResponse(
-		apiClient.post('/anyrouter2/addAccountLoginInfo', {
+		apiClient.post('/lyanyrouter/addAccountLoginInfo', {
 			account_id,
 		})
 	);
@@ -273,7 +274,7 @@ export async function addAccountLoginInfo(params) {
  * }>, error?: string}>}
  */
 export async function getLinuxDoAccountsWithSession() {
-	return handleApiResponse(apiClient.post('/anyrouter2/getLinuxDoAccountsWithSession', {}));
+	return handleApiResponse(apiClient.post('/lyanyrouter/getLinuxDoAccountsWithSession', {}));
 }
 
 /**
@@ -328,7 +329,7 @@ export async function incrementBalance({ _id, amount }) {
 	}
 
 	return handleApiResponse(
-		apiClient.post('/anyrouter2/incrementBalance', {
+		apiClient.post('/lyanyrouter/incrementBalance', {
 			_id,
 			amount,
 		})
@@ -401,7 +402,7 @@ export async function getCheckinableAccounts(params = {}) {
 	}
 
 	return handleApiResponse(
-		apiClient.post('/anyrouter2/getCheckinableAccounts', {
+		apiClient.post('/lyanyrouter/getCheckinableAccounts', {
 			...(limit && { limit }),
 		})
 	);
@@ -455,7 +456,8 @@ export async function getCheckinableAccounts(params = {}) {
  * });
  */
 export async function updatePasswordChange(params) {
-	const { record_id, new_username, status, error_reason, increment_error_count, account_info } = params;
+	const { record_id, new_username, status, error_reason, increment_error_count, account_info } =
+		params;
 
 	// 验证必需字段
 	if (!record_id) {
@@ -505,9 +507,14 @@ export async function updatePasswordChange(params) {
 	}
 
 	console.log('[API调试] updatePasswordChange 最终请求数据:', JSON.stringify(requestData, null, 2));
-	console.log('[API调试] increment_error_count 值:', increment_error_count, '类型:', typeof increment_error_count);
+	console.log(
+		'[API调试] increment_error_count 值:',
+		increment_error_count,
+		'类型:',
+		typeof increment_error_count
+	);
 
-	return handleApiResponse(apiClient.post('/anyrouter2/updatePasswordChange', requestData));
+	return handleApiResponse(apiClient.post('/lyanyrouter/updatePasswordChange', requestData));
 }
 
 /**
@@ -610,7 +617,7 @@ export async function getAccountList(params) {
 		requestData.username_keyword = username_keyword.trim();
 	}
 
-	return handleApiResponse(apiClient.post('/anyrouter2/getAccountList', requestData));
+	return handleApiResponse(apiClient.post('/lyanyrouter/getAccountList', requestData));
 }
 
 /**
@@ -658,7 +665,7 @@ export async function deleteAccount(params) {
 	}
 
 	return handleApiResponse(
-		apiClient.post('/anyrouter2/deleteAccount', {
+		apiClient.post('/lyanyrouter/deleteAccount', {
 			account_id,
 			user_id,
 		})

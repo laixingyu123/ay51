@@ -25,7 +25,7 @@ import apiClient, { handleApiResponse } from './client.js';
  * }
  */
 export async function getTopPriorityTask() {
-	return handleApiResponse(apiClient.post('/anyrouter2/getTopPriorityTask', {}));
+	return handleApiResponse(apiClient.post('/lyanyrouter/getTopPriorityTask', {}));
 }
 
 /**
@@ -45,7 +45,7 @@ export async function getTopPriorityTask() {
  * }
  */
 export async function updateInviteCount({ task_id }) {
-	return handleApiResponse(apiClient.post('/anyrouter2/updateInviteCount', { task_id }));
+	return handleApiResponse(apiClient.post('/lyanyrouter/updateInviteCount', { task_id }));
 }
 
 export default {

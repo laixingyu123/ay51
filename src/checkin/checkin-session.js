@@ -595,7 +595,9 @@ class AnyRouterSessionSignIn {
 
 						// 如果有待上传的出售令牌，批量上传到服务器
 						if (pendingSellTokenNames.length > 0) {
-							console.log(`[令牌管理] 检测到 ${pendingSellTokenNames.length} 个出售令牌，准备批量上传...`);
+							console.log(
+								`[令牌管理] 检测到 ${pendingSellTokenNames.length} 个出售令牌，准备批量上传...`
+							);
 
 							// 从获取到的令牌中匹配出售令牌
 							const keysToUpload = [];
@@ -608,7 +610,7 @@ class AnyRouterSessionSignIn {
 										key_type: 'anyrouter',
 										is_sold: false,
 										quota: quota,
-										source_name: `${accountInfo.username || ""}&${pending.name}`,
+										source_name: `${accountInfo.username || ''}&${pending.name}`,
 									});
 								}
 							}

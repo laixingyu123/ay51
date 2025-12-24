@@ -17,7 +17,7 @@ import apiClient, { handleApiResponse } from './client.js';
  * }
  */
 export async function getRandomApplication() {
-	return handleApiResponse(apiClient.post('/anyrouter2/getRandomApplication', {}));
+	return handleApiResponse(apiClient.post('/lyanyrouter/getRandomApplication', {}));
 }
 
 /**
@@ -34,7 +34,7 @@ export async function getRandomApplication() {
  * }
  */
 export async function resetApplicationUsage({ id }) {
-	return handleApiResponse(apiClient.post('/anyrouter2/resetApplicationUsage', { id }));
+	return handleApiResponse(apiClient.post('/lyanyrouter/resetApplicationUsage', { id }));
 }
 
 export default {
